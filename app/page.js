@@ -30,7 +30,7 @@ export default function Home() {
   };
 
   const handleNameCheck = async () => {
-    checkTweet();
+    // checkTweet();
     checkInsta();
   };
 

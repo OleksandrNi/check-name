@@ -7,10 +7,11 @@ export async function POST(req, res) {
   const screenName = body.username;
 
   try {
-    const responseInsta = await axios.get(
+    const response = await axios.get(
       `https://www.instagram.com/${screenName}/?__a=1`
     );
-    const responseText = await responseInsta.data;
+    const responseText = await response.data;
+    // console.log('responseText', responseText)
     const jsonStartIndex = await responseText.indexOf("{");
     const cleanedResponseText = await responseText.substring(jsonStartIndex);
     const jsonData = await JSON.parse(cleanedResponseText);
