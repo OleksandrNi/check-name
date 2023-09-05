@@ -25,12 +25,12 @@ export default function Home() {
       const { data } = await axios.post(`https://check-name.vercel.app/api/insta`, {
       username,
     });
-    console.log("data", data);
+    console.log("dataError", data.error);
     setInstaInfo(data.message);
   };
 
   const handleNameCheck = async () => {
-    // checkTweet();
+    checkTweet();
     checkInsta();
   };
 
