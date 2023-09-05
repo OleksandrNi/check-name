@@ -26,14 +26,8 @@ export default function Home() {
       username,
     });
     console.log("dataError", data.error);
-    if(data.error && data.error.status === 429) {
 
-      setInstaInfo(`User ${username} not exist in Insta`);
-    } else {
-      setInstaInfo(data.message);
-      
-    }
-
+    setInstaInfo(data.message);
   };
 
   const handleNameCheck = async () => {
