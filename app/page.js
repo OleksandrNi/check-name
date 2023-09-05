@@ -9,7 +9,8 @@ export default function Home() {
   const [twitterInfo, setTwitterInfo] = useState(null);
 
   const handleTwitterCheck = async () => {
-    const { data } = await axios.post(`http://localhost:3000/api/search`, {
+    // const { data } = await axios.post(`http://localhost:3000/api/search`, {
+    const { data } = await axios.post(`http://https://check-name.vercel.app//api/search`, {
       twitterUsername,
     });
     setTwitterInfo(data.message);
