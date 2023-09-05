@@ -11,7 +11,7 @@ export default function Home() {
 
   const handleNameCheck = async () => {
     // const { data } = await axios.post(`http://localhost:3000/api/search`, {
-    const { data } = await axios.post(`https://check-name.vercel.app//api/search`, {
+    const { data } = await axios.post(`https://check-name.vercel.app/api/search`, {
       username,
     });
     console.log(data)
