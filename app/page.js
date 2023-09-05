@@ -10,8 +10,8 @@ export default function Home() {
   const [instaInfo, setInstaInfo] = useState(null);
 
   const checkTweet = async () => {
-    const { data } = await axios.post(`http://localhost:3000/api/tweet`, {
-      // const { data } = await axios.post(`https://check-name.vercel.app/api/tweet`, {
+    // const { data } = await axios.post(`http://localhost:3000/api/tweet`, {
+      const { data } = await axios.post(`https://check-name.vercel.app/api/tweet`, {
       username,
     });
     console.log("data", data);
@@ -21,8 +21,8 @@ export default function Home() {
   };
 
   const checkInsta = async () => {
-    const { data } = await axios.post(`http://localhost:3000/api/insta`, {
-      // const { data } = await axios.post(`https://check-name.vercel.app/api/tweet`, {
+    // const { data } = await axios.post(`http://localhost:3000/api/insta`, {
+      const { data } = await axios.post(`https://check-name.vercel.app/api/insta`, {
       username,
     });
     console.log("data", data);
