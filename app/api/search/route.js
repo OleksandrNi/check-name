@@ -8,7 +8,6 @@ const bearerToken =
 export async function POST(req, res) {
   const body = await req.json();
   const screenName = body.username;
-  console.log("screenName", screenName);
 
   let checkResponse = [];
 
@@ -35,19 +34,22 @@ export async function POST(req, res) {
     checkResponse.push(`User not exist in Twitter`);
   }
 
-  
   try {
     const responseInsta = await axios.get(
       `https://www.instagram.com/${screenName}/?__a=1`
     );
     const responseText = await responseInsta.data;
-    const jsonStartIndex = responseText.indexOf("{");
-    const cleanedResponseText = responseText.substring(jsonStartIndex);
-    const jsonData = JSON.parse(cleanedResponseText);
-    checkResponse.push(`User not exist in Insta`);
-    console.log(jsonData.error);
+    const jsonStartIndex = await responseText.indexOf("{");
+    const cleanedResponseText = await responseText.substring(jsonStartIndex);
+    const jsonData = await JSON.parse(cleanedResponseText);
+    if (jsonData.error) {
+      checkResponse.push(`User not exist in Insta`);
+    }
+    console.log("here we check exist insta", jsonData.error);
   } catch (error) {
-    checkResponse.push(`User exist in Insta`);
+    if (error) {
+      checkResponse.push(`User exist in Insta`);
+    }
     console.error("Ошибка при парсинге JSON:", error.message);
   }
 
