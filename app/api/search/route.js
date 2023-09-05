@@ -35,21 +35,21 @@ export async function POST(req, res) {
     checkResponse.push(`User not exist in Twitter`);
   }
 
-  // const response = await axios.get(
-  //   `https://www.instagram.com/${screenName}/?__a=1`
-  // );
-  // const responseText = await response.data;
-  // const jsonStartIndex = responseText.indexOf("{");
-  // const cleanedResponseText = responseText.substring(jsonStartIndex);
-
-  // try {
-  //   const jsonData = JSON.parse(cleanedResponseText);
-  //   checkResponse.push(`User not exist in Insta`);
-  //   console.log(jsonData.error);
-  // } catch (error) {
-  //   checkResponse.push(`User exist in Insta`);
-  //   console.error("Ошибка при парсинге JSON:", error.message);
-  // }
+  
+  try {
+    const responseInsta = await axios.get(
+      `https://www.instagram.com/${screenName}/?__a=1`
+    );
+    const responseText = await responseInsta.data;
+    const jsonStartIndex = responseText.indexOf("{");
+    const cleanedResponseText = responseText.substring(jsonStartIndex);
+    const jsonData = JSON.parse(cleanedResponseText);
+    checkResponse.push(`User not exist in Insta`);
+    console.log(jsonData.error);
+  } catch (error) {
+    checkResponse.push(`User exist in Insta`);
+    console.error("Ошибка при парсинге JSON:", error.message);
+  }
 
   return NextResponse.json(checkResponse);
 }
