@@ -9,14 +9,29 @@ export default function Home() {
   const [twitterInfo, setTwitterInfo] = useState(null);
   const [instaInfo, setInstaInfo] = useState(null);
 
-  const handleNameCheck = async () => {
-    // const { data } = await axios.post(`http://localhost:3000/api/search`, {
-    const { data } = await axios.post(`https://check-name.vercel.app/api/search`, {
+  const checkTweet = async () => {
+    const { data } = await axios.post(`http://localhost:3000/api/tweet`, {
+      // const { data } = await axios.post(`https://check-name.vercel.app/api/tweet`, {
       username,
     });
-    console.log(data)
-    setTwitterInfo(data[0]);
-    setInstaInfo(data[1]);
+    console.log("data", data);
+    if (data) {
+      setTwitterInfo(data.message);
+    }
+  };
+
+  const checkInsta = async () => {
+    const { data } = await axios.post(`http://localhost:3000/api/insta`, {
+      // const { data } = await axios.post(`https://check-name.vercel.app/api/tweet`, {
+      username,
+    });
+    console.log("data", data);
+    setInstaInfo(data.message);
+  };
+
+  const handleNameCheck = async () => {
+    checkTweet();
+    checkInsta();
   };
 
   return (
@@ -29,8 +44,8 @@ export default function Home() {
       />
       <button onClick={handleNameCheck}>Check name in SM</button>
       Info
-      {twitterInfo &&  <div>{twitterInfo}</div>}
-      {instaInfo &&  <div>{instaInfo}</div>}
+      {twitterInfo && <div>{twitterInfo}</div>}
+      {instaInfo && <div>{instaInfo}</div>}
     </main>
   );
 }
