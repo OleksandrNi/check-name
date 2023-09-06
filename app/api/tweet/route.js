@@ -21,14 +21,14 @@ export async function POST(req, res) {
 
     if (response.status === 200) {
       return NextResponse.json({
-        message: `in Twitter this account ${response.data.name} with id${response.data.id}`,
+        message: `in Twitter user ${screenName} is account ${response.data.name} with id${response.data.id}`,
       });
     } else {
       console.log(`Error: Unexpected status code ${response}`);
     }
   } catch (error) {
     return NextResponse.json({
-      message: `User not exist in Twitter with name ${screenName}`,
+      message: `User ${screenName} not exist in Twitter`,
     });
   }
 }

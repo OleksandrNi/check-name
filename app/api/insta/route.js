@@ -22,4 +22,6 @@ export async function POST(req, res) {
     console.error("Ошибка при парсинге JSON:", error.message);
     return NextResponse.json({ message: `User ${screenName} exist in Insta`, error: error });
   }
+
+
 }

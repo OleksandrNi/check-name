@@ -8,6 +8,7 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [twitterInfo, setTwitterInfo] = useState(null);
   const [instaInfo, setInstaInfo] = useState(null);
+  const [tiktokInfo, setTiktokInfo] = useState(null);
 
   const checkTweet = async () => {
     // const { data } = await axios.post(`http://localhost:3000/api/tweet`, {
@@ -30,9 +31,19 @@ export default function Home() {
     setInstaInfo(data.message);
   };
 
+  const checkTiktok = async () => {
+    // const { data } = await axios.post(`http://localhost:3000/api/tiktok`, {
+      const { data } = await axios.post(`https://check-name.vercel.app/api/tiktok`, {
+      username,
+    });
+
+    setTiktokInfo(data.message);
+  };
+
   const handleNameCheck = async () => {
     checkTweet();
     checkInsta();
+    checkTiktok()
   };
 
   return (
@@ -47,6 +58,7 @@ export default function Home() {
       Info
       {twitterInfo && <div>{twitterInfo}</div>}
       {instaInfo && <div>{instaInfo}</div>}
+      {tiktokInfo && <div>{tiktokInfo}</div>}
     </main>
   );
 }
