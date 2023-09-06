@@ -14,6 +14,7 @@ export default function Home() {
   // const URL = "http://localhost:3000/";
 
   const checkTweet = async () => {
+    // console.log("responseresponse", response);
     const { data } = await axios.post(`${URL}api/tweet`, {
       username,
     });
@@ -28,6 +29,7 @@ export default function Home() {
       username,
     });
     console.log("dataError", data.error);
+    console.log("Response", data.response);
 
     setInstaInfo(data.message);
   };
