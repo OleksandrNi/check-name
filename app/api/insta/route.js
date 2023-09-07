@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+const https = require('https');
 
 const axios = require("axios");
 
@@ -8,10 +9,13 @@ export async function POST(req, res) {
 
   try {
     const response = await axios.get(
-      `https://www.instagram.com/${screenName}/?__a=1`
+      `https://www.instagram.com/${screenName}/?__a=1`, {
+        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+      }
     );
+    // console.log(response)
     const responseText = response.data;
-    // console.log('responseText', response)
+    // console.log('responseText', responseText)
     const jsonStartIndex = responseText.indexOf("{");
     const cleanedResponseText = responseText.substring(jsonStartIndex);
     const jsonData = JSON.parse(cleanedResponseText);
@@ -29,4 +33,5 @@ export async function POST(req, res) {
     });
   }
   
+
 }

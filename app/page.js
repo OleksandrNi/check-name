@@ -10,9 +10,9 @@ export default function Home() {
   const [instaInfo, setInstaInfo] = useState(null);
   const [tiktokInfo, setTiktokInfo] = useState(null);
 
-  const URL = 'http://89.40.2.236:3000/'
+  // const URL = 'http://89.40.2.236:3000/'
   // const URL = 'https://check-name.vercel.app/'
-  // const URL = "http://localhost:3000/";
+  const URL = "http://localhost:3000/";
 
   const checkTweet = async () => {
     const { data } = await axios.post(`${URL}api/tweet`, {
@@ -43,9 +43,9 @@ export default function Home() {
   };
 
   const handleNameCheck = async () => {
-    checkTweet();
+    // checkTweet();
     checkInsta();
-    checkTiktok();
+    // checkTiktok();
   };
 
   return (
