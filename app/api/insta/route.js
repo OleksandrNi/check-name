@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-const https = require('https');
+const https = require("https");
 
 const axios = require("axios");
 
@@ -32,6 +32,4 @@ export async function POST(req, res) {
       error: error,
     });
   }
-  
-
 }

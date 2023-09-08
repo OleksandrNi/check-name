@@ -9,10 +9,11 @@ export default function Home() {
   const [twitterInfo, setTwitterInfo] = useState(null);
   const [instaInfo, setInstaInfo] = useState(null);
   const [tiktokInfo, setTiktokInfo] = useState(null);
+  const [dotInfo, setDotInfo] = useState(null);
 
   // const URL = 'http://89.40.2.236:3000/'
-  // const URL = 'https://check-name.vercel.app/'
-  const URL = "http://localhost:3000/";
+  const URL = 'https://check-name.vercel.app/'
+  // const URL = "http://localhost:3000/";
 
   const checkTweet = async () => {
     const { data } = await axios.post(`${URL}api/tweet`, {
@@ -42,10 +43,20 @@ export default function Home() {
     setTiktokInfo(data.message);
   };
 
+  const checkDomain = async () => {
+    const { data } = await axios.post(`${URL}api/dot`, {
+      username,
+    });
+
+    setDotInfo(data.results);
+  };
+  console.log("dotInfo", dotInfo);
+
   const handleNameCheck = async () => {
-    // checkTweet();
+    checkTweet();
     checkInsta();
-    // checkTiktok();
+    checkTiktok();
+    checkDomain();
   };
 
   return (
@@ -61,6 +72,9 @@ export default function Home() {
       {twitterInfo && <div>{twitterInfo}</div>}
       {instaInfo && <div>{instaInfo}</div>}
       {tiktokInfo && <div>{tiktokInfo}</div>}
+      {dotInfo && dotInfo.map(dot => (
+        <div key={dot.domain}>Dot {dot.domain} is {dot.available ? 'not exist' : 'exist'}</div>
+      ))}
     </main>
   );
 }
