@@ -12,7 +12,7 @@ export async function POST(req, res) {
 
   // Create an Axios instance with the proxy
   const axiosInstance = axios.create({
-    proxy: false, // Disable the default proxy setting
+    proxy: true, // Disable the default proxy setting
     httpsAgent: new https.Agent({
       // Use the proxy for HTTPS requests
       proxy: proxyUrl,
