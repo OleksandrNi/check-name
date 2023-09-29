@@ -10,10 +10,14 @@ export async function POST(req, res) {
   try {
     const response = await axios.get(
       `https://www.instagram.com/${screenName}/?__a=1`, {
-        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+        headers: {
+          'X-Ig-App-Id': 936619743392459
+        }
       }
     );
     // console.log(response)
+
+    
     const responseText = response.data;
     // console.log('responseText', responseText)
     const jsonStartIndex = responseText.indexOf("{");

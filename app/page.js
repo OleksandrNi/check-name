@@ -50,17 +50,23 @@ export default function Home() {
 
     setDotInfo(data.results);
   };
-  console.log("dotInfo", dotInfo);
 
   const handleNameCheck = async () => {
-    checkTweet();
+    // checkTweet();
     checkInsta();
-    checkTiktok();
-    checkDomain();
+    // checkTiktok();
+    // checkDomain();
   };
+
+  const value = 1;
+  const width = 400;
+  const height = 40;
+  const color = "red";
+  const borderColor = "gray";
 
   return (
     <main className={styles.main}>
+update 12:54
       <input
         type="text"
         placeholder="enter name for check"
