@@ -1,38 +1,43 @@
 import { NextResponse } from "next/server";
-const https = require("https");
+const axios = require("axios")
+const https = require("https"); // Import the 'https' module
 
-const axios = require("axios");
 
 export async function POST(req, res) {
   const body = await req.json();
   const screenName = body.username;
 
-  try {
-    const response = await axios.get(
-      `https://www.instagram.com/${screenName}/?__a=1`, {
-        headers: {
-          'X-Ig-App-Id': 936619743392459
-        }
-      }
-    );
-    // console.log(response)
+  // Define your proxy URL
+  const proxyUrl = 'https://check-name.vercel.app/'; // Replace with your actual proxy URL
 
-    
+  // Create an Axios instance with the proxy
+  const axiosInstance = axios.create({
+    proxy: false, // Disable the default proxy setting
+    httpsAgent: new https.Agent({
+      // Use the proxy for HTTPS requests
+      proxy: proxyUrl,
+    }),
+  });
+
+  try {
+    const response = await axiosInstance.get(
+      `https://www.instagram.com/${screenName}/?__a=1`
+    );
+
     const responseText = response.data;
-    // console.log('responseText', responseText)
     const jsonStartIndex = responseText.indexOf("{");
     const cleanedResponseText = responseText.substring(jsonStartIndex);
     const jsonData = JSON.parse(cleanedResponseText);
 
     console.log("here we check exist insta", jsonData.error);
     return NextResponse.json({
-      message: `User ${screenName} not exist in Insta`,
+      message: `User ${screenName} not exist on Instagram`,
       response: responseText,
     });
   } catch (error) {
-    console.error("Ошибка при парсинге JSON:", error.message);
+    console.error("Error parsing JSON:", error.message);
     return NextResponse.json({
-      message: `User ${screenName} exist in Insta`,
+      message: `User ${screenName} exists on Instagram`,
       error: error,
     });
   }

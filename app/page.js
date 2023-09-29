@@ -66,7 +66,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-update 12:54
+update 13:16
       <input
         type="text"
         placeholder="enter name for check"
